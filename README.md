@@ -64,3 +64,10 @@ wrong tool.
 
 - **Empty counter.** `estimate()` on a counter with no observations returns
   `0.0` exactly, via the small-range correction.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
